@@ -35,26 +35,61 @@ function getPlayerChoice(){
 function playRound(playerSelection, computerSelection){
     let x = playerSelection;
     let y = computerSelection;
+    let z = '';
     switch(true){
         case (playerSelection===computerSelection):
-            return "Draw";
+            z = "Draw";
+            console.log(z);
+            return z;
             break;
         case (x==='rock' && y==='scissors'):
         case (x==='paper' && y==='rock'):
         case (x==='scissors' && y==='paper'):
-            return "Player wins round";
+            z = "Player wins round";
+            console.log(z);
+            return z;
             break;
         case (y==='rock' && x==='scissors'):
         case (y==='paper' && x==='rock'):
         case (y==='scissors' && x==='paper'):
-            return "Computer wins round";
+            z = "Computer wins round";
+            console.log(z);
+            return z;
             break;
         default:
-            return "Player picks an invalid choice. Computer wins round";
+            z = "Player picks an invalid choice. Computer wins round";
+            console.log(z);
+            return z;
     }
 }
 
-let a = getPlayerChoice();
-let b = getComputerChoice();
-c = playRound(a, b);
-console.log(c);
+//best of 5 rock-paper-scissors game
+
+function game(){
+    let roundCount = 1;
+    let scoreComputer = 0;
+    let scorePlayer = 0;
+    for(let i = 1; i <= 5; i++){
+        console.log("Round " + roundCount);
+        let result = playRound(getPlayerChoice(), getComputerChoice());
+        if (result === "Draw"){
+            scoreComputer++;
+            scorePlayer++;
+        } else if (result === "Player wins round"){
+            scorePlayer++;
+        } else if (result === "Computer wins round" || result === "Player picks an invalid choice. Computer wins round"){
+            scoreComputer++;
+        }
+        roundCount++;
+        console.log("Score:\nPlayer - " + scorePlayer + "\nComputer - " + scoreComputer);
+    }
+    if (scoreComputer > scorePlayer){
+        console.log("WINNER: Computer!");
+    } else if (scorePlayer > scoreComputer){
+        console.log("WINNER: Player!");
+    } else if (scoreComputer === scorePlayer){
+        console.log("IT'S A TIE!")
+    }
+}
+
+game();
