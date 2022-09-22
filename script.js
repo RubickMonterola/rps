@@ -9,29 +9,52 @@ function getComputerChoice(){
     } else {
         computerChoice = 'scissors';
     }
+    console.log("Computer picks " + computerChoice);
     return computerChoice;
 }
 
 //getPlayerChoice function
-function getPlayerChoice(promptedChoice){
-    let playerChoice = promptedChoice.toLowerCase();
+function getPlayerChoice(){
+    let promptInput = prompt("rock paper scissors shoot\nyour choice?: ");
+    let playerChoice = promptInput.toLowerCase();
     switch(playerChoice){
         case 'rock':
         case 'paper':
         case 'scissors':
+            console.log("Player picks " + playerChoice);
             return playerChoice;
             break;
         default:
-            return "an invalid choice";
+            playerChoice = "an invalid choice";
+            console.log("Player picks " + playerChoice);
+            return playerChoice
     }
 }
 
 //playRound function
-function playRound(){
-    
+function playRound(playerSelection, computerSelection){
+    let x = playerSelection;
+    let y = computerSelection;
+    switch(true){
+        case (playerSelection===computerSelection):
+            return "Draw";
+            break;
+        case (x==='rock' && y==='scissors'):
+        case (x==='paper' && y==='rock'):
+        case (x==='scissors' && y==='paper'):
+            return "Player wins round";
+            break;
+        case (y==='rock' && x==='scissors'):
+        case (y==='paper' && x==='rock'):
+        case (y==='scissors' && x==='paper'):
+            return "Computer wins round";
+            break;
+        default:
+            return "Player picks an invalid choice. Computer wins round";
+    }
 }
 
-let promptInput = prompt("rock paper scissors shoot\nyour choice?: ");
-getPlayerChoice(promptInput);
-console.log("Player picked " + getPlayerChoice(promptInput));
-console.log("Computer picked " + getComputerChoice());
+let a = getPlayerChoice();
+let b = getComputerChoice();
+c = playRound(a, b);
+console.log(c);
